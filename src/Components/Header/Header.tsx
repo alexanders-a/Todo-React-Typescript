@@ -11,7 +11,7 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { ColorModeSwitcher } from "../../ColorModeSwitcher";
+import { ColorModeSwitcher } from "../ChakraUI/ColorModeSwitcher";
 
 type T = {
   setQuery: any;

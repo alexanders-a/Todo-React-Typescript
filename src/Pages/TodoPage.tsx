@@ -1,5 +1,5 @@
 import { useToast } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ITodo } from "../Components/interfaces/interfaces";
 import { TodoAdd } from "../Components/Todo/TodoAdd";
 import TodoList from "../Components/Todo/TodoList";
@@ -14,51 +14,63 @@ const TodoPage: React.FC<T> = ({ query }) => {
 
   const toast = useToast();
 
-  const handleAdd = (title: string) => {
-    const newTodo = {
-      title: title,
-      id: Date.now(),
-      completed: false,
-    };
-    toast({
-      title: "Success",
-      variant: "left-accent",
-      isClosable: true,
-      position: "top-right",
-      status: "success",
-    });
-    setTodos((prev) => [newTodo, ...prev]);
-  };
-  const toggleHandler = (id: number) => {
-    setTodos((prev) =>
-      prev.map((todo) => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed;
-        }
+  const handleAdd = useCallback(
+    (title: string) => {
+      const newTodo = {
+        title: title,
+        id: Date.now(),
+        completed: false,
+      };
+      toast({
+        title: "Success",
+        variant: "left-accent",
+        isClosable: true,
+        position: "top-right",
+        status: "success",
+      });
+      setTodos((prev) => [newTodo, ...prev]);
+    },
+    [toast]
+  );
+  
 
-        if (todo.completed === false && todo.id === id) {
-          toast({
-            title: "Great",
-            variant: "left-accent",
-            isClosable: true,
-            position: "top-right",
-            status: "success",
-          });
-        }
-        return todo;
-      })
-    );
-  };
-  const removeHandler = (id: number) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
-    toast({
-      title: "Deleted",
-      variant: "left-accent",
-      isClosable: true,
-      position: "top-right",
-      status: "success",
-    });
-  };
+  const toggleHandler = useCallback(
+    (id: number) => {
+      setTodos((prev) =>
+        prev.map((todo) => {
+          if (todo.id === id) {
+            todo.completed = !todo.completed;
+          }
+
+          if (todo.completed === false && todo.id === id) {
+            toast({
+              title: "Great",
+              variant: "left-accent",
+              isClosable: true,
+              position: "top-right",
+              status: "success",
+            });
+          }
+          return todo;
+        })
+      );
+    },
+    [toast]
+  );
+
+  const removeHandler = useCallback(
+    (id: number) => {
+      setTodos((prev) => prev.filter((todo) => todo.id !== id));
+      toast({
+        title: "Deleted",
+        variant: "left-accent",
+        isClosable: true,
+        position: "top-right",
+        status: "success",
+      });
+    },
+    [toast]
+  );
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));

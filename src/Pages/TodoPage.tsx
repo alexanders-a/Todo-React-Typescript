@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
-import { ITodo } from "../Components/interfaces/interfaces";
+import { ITodo } from "../interfaces/interfaces";
 import { TodoAdd } from "../Components/Todo/TodoAdd";
 import TodoList from "../Components/Todo/TodoList";
 
@@ -32,7 +32,6 @@ const TodoPage: React.FC<T> = ({ query }) => {
     },
     [toast]
   );
-  
 
   const toggleHandler = useCallback(
     (id: number) => {

@@ -24,7 +24,6 @@ export const TodoAdd: React.FC<T> = memo((props) => {
   );
   const [error, setError] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
-  console.log("render");
 
   return (
     <Flex m={2} mb={4} align={"center"} justify={"center"}>
@@ -92,7 +91,8 @@ export const TodoAdd: React.FC<T> = memo((props) => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setText(e.target.value)
                 }
-                maxLength={100}
+                maxLength={50}
+                minLength={1}
               />
             </InputGroup>
           </FormControl>
@@ -121,7 +121,7 @@ export const TodoAdd: React.FC<T> = memo((props) => {
         >
           {error
             ? "Oh no, there's been a mistake! 😢 Please, the text must have at least more than one character"
-            : "The maximum number of characters is 100 ✌️"}
+            : "The maximum number of characters is 50 ✌️"}
         </Text>
       </Container>
     </Flex>

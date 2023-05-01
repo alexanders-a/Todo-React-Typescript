@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Heading, List, Stack, useBreakpointValue } from "@chakra-ui/react";
-import { ITodo } from "../interfaces/interfaces";
+import { ITodo } from "../../interfaces/interfaces";
 import ListItems from "./TodoItem";
 
 type T = {
